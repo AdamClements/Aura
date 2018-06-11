@@ -211,10 +211,11 @@ namespace AuraAPI
             _lightComponent = GetComponent<Light>();
         }
 
-        private void OnEnable()
+        private void Start()
         {
             if(!Aura.CheckCompatibility())
             {
+                Debug.LogError("Not compatible, disabling AuraLight");
                 enabled = false;
                 return;
             }
@@ -225,11 +226,12 @@ namespace AuraAPI
             }
             else
             {
+                Debug.LogError("No Aura instance, disabling AuraLight");
                 enabled = false;
             }
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             if(_isInitialized)
             {
